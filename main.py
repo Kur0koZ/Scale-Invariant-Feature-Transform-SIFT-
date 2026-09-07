@@ -7,8 +7,8 @@ import time
 
 def main():
 
-    obj = cv2.imread("One_Piece.png", cv2.IMREAD_GRAYSCALE).astype(np.float64)
-    scene = cv2.imread("One_piece.png", cv2.IMREAD_GRAYSCALE).astype(np.float64)
+    obj = cv2.imread("book.png", cv2.IMREAD_GRAYSCALE).astype(np.float64)
+    scene = cv2.imread("3book.png", cv2.IMREAD_GRAYSCALE).astype(np.float64)
 
     kps_obj, desc_obj = detect_and_describe(obj, n_octaves=3)
     kps_scene, desc_scene = detect_and_describe(scene, n_octaves=3)
