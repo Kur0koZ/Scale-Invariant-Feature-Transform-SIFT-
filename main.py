@@ -46,6 +46,7 @@ def main():
     scene_box = (M @ corners.T).T + t
     for i, pt in enumerate(scene_box):
         print(f"   มุมที่ {i+1}: ({pt[0]:.1f},{pt[1]:.1f})")
+        visualize(obj, scene, kps_obj, kps_scene, matches, inlier_idx, scene_box)
 
 if __name__ == "__main__":
     main()
