@@ -2,21 +2,19 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from function import detect_and_describe, match_descriptors, ransac_affine, visualize
-import time
-
-
 def main():
 
-    obj = cv2.imread("book.png", cv2.IMREAD_GRAYSCALE).astype(np.float64)
-    scene = cv2.imread("3book.png", cv2.IMREAD_GRAYSCALE).astype(np.float64)
+    obj = cv2.imread("My_face.jpg", cv2.IMREAD_GRAYSCALE).astype(np.float64)
+    scene = cv2.imread("CPE_Class1.jpg", cv2.IMREAD_GRAYSCALE).astype(np.float64)
 
     kps_obj, desc_obj = detect_and_describe(obj, n_octaves=3)
     kps_scene, desc_scene = detect_and_describe(scene, n_octaves=3)
     print(f" object keypoints: {len(kps_obj)} | scene keypoints: {len(kps_scene)}")
 
     # print("\nSTEP 3: Matching + Lowe's Ratio Test")
-
+    
     matches = match_descriptors(desc_obj, desc_scene, ratio_thresh=0.75)
+
     print(f" match ที่ผ่าน ratio test: {len(matches)} / {len(kps_obj)}")
     #for ratio in [0.5, 0.6, 0.7, 0.75, 0.8, 0.9]:
 
@@ -46,7 +44,8 @@ def main():
     scene_box = (M @ corners.T).T + t
     for i, pt in enumerate(scene_box):
         print(f"   มุมที่ {i+1}: ({pt[0]:.1f},{pt[1]:.1f})")
-        visualize(obj, scene, kps_obj, kps_scene, matches, inlier_idx, scene_box)
+
+    visualize(obj, scene, kps_obj, kps_scene, matches, inlier_idx, scene_box)
 
 if __name__ == "__main__":
     main()
